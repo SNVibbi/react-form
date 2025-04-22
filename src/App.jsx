@@ -3,28 +3,50 @@
 function App() {
 
   function signUp(formData) {
-    const email = formData.get('email');
-    console.log(email);
-    const password = formData.get('password');
-    console.log(password);
-    const description = formData.get('description');
-    console.log(description);
-    const employmentStatus = formData.get('employmentStatus');
-    console.log(employmentStatus);
-    const dietaryRestrictions = formData.getAll('dietaryRestrictions');
-    console.log(dietaryRestrictions);
-    const data = {
-      email,
-      password,
-      description,
-      employmentStatus,
-      dietaryRestrictions
+
+    const data = Object.fromEntries(formData);
+    const dietaryData = formData.getAll('dietaryRestrictions');
+   const allData = {
+      ...data,
+      dietaryRestrictions: dietaryData
     }
-    console.log(data);
+    console.log(allData);
     // Here you can send the data to your server or perform any other action
     // For example, using fetch:
     // fetch('/api/signup', {
     //   method: 'POST',
+    //   body: JSON.stringify(data),
+    //   headers: {
+    //     'Content-Type': 'application/json'
+    //   }
+    // })
+    
+
+    // const email = formData.get('email');
+    // console.log(email);
+    // const password = formData.get('password');
+    // console.log(password);
+    // const description = formData.get('description');
+    // console.log(description);
+    // const employmentStatus = formData.get('employmentStatus');
+    // console.log(employmentStatus);
+    // const dietaryRestrictions = formData.getAll('dietaryRestrictions');
+    // console.log(dietaryRestrictions);
+    // const favColor = formData.get('favColor');
+    // console.log(favColor);
+    // const data = {
+    //   email,
+    //   password,
+    //   description,
+    //   employmentStatus,
+    //   dietaryRestrictions,
+    //   favColor
+    // }
+    // console.log(data);
+    // // Here you can send the data to your server or perform any other action
+    // // For example, using fetch:
+    // // fetch('/api/signup', {
+    // //   method: 'POST',
   }
 
   return (
@@ -73,6 +95,18 @@ function App() {
               Gluten-free
             </label>
           </fieldset>
+
+          <label htmlFor="favColor">What is your favorite color?</label>
+          <select id="favColor" name="favColor" required>
+            <option value="" disabled selected>Select your favorite color</option>
+            <option value="red">Red</option>
+            <option value="green">Green</option>
+            <option value="blue">Blue</option>
+            <option value="yellow">Yellow</option>
+            <option value="purple">Purple</option>
+            <option value="orange">Orange</option>
+            <option value="pink">Pink</option>
+          </select>
         
           <button type="submit">Submit</button>
 
